@@ -1,22 +1,19 @@
 #pragma once
 #include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
 class Renderer;
 
 class Mesh
 {
 public:
 	VertexBuffer* vertexBuffer;
+	VertexBufferElement layout;
 	//IndexBuffer* indexBuffer;
 	//Texture* texture;
-	Mesh()
-	{
-		vertexBuffer = new VertexBuffer();
-	}
-	Mesh(float* vertices, unsigned int numVertices) {
-		setMeshData(vertices, numVertices);
-	}
-	void setMeshData(float* vertices, unsigned int numVertices);
-	void render(Renderer* renderer);
-private:
 
+	Mesh(float* vertices, unsigned int bufferSize,VertexBufferElement layout) {
+		vertexBuffer = new VertexBuffer(vertices,bufferSize);
+		this->layout = layout;
+	}
+private:
 };

@@ -9,14 +9,22 @@ class ShaderProgram
 {
 public:
 	GLuint programID;
+	std::string vertexUrl;
+	std::string fragmentUrl;
 	std::unordered_map<std::string, GLint> uniformLocations;
-	void compile_path(const char* vShaderFilePath, const char* fShaderFilePath);
-	void compile_string(const std::string& vertexShaderSource, const std::string& fragmentShaderSource);
-	GLuint createShaderProgram(const char* vShaderFilePath, const char* fShaderFilePath);
+	bool isCompiled = false;
+
+	ShaderProgram(std::string vertexUrl, std::string fragmentUrl) :vertexUrl(vertexUrl), fragmentUrl(fragmentUrl) {}
+	void compile();
 	void use();
+	void unuse();
+	void setUniform(const std::string& name, int value);
+	void setUniform(const std::string& name, float value);
 	void setUniform(const std::string& name, const glm::mat4& matrix);
 	void setUniform(const std::string& name, const glm::vec3& vector);
 private:
 	std::string readFile(const char* filePath);
+	void compile_string(const std::string& vertexShaderSource, const std::string& fragmentShaderSource);
+	void compile_path(const char* vShaderFilePath, const char* fShaderFilePath);
 
 };

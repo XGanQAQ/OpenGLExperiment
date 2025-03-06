@@ -1,15 +1,27 @@
 #pragma once
 #include "Model.h"
+Model::Model()
+{
+	vao = new VertexArrayObject();
+	vao->create();
+}
+Model::Model(Mesh* mesh, int drewCount)
+{
+	vao = new VertexArrayObject();
+	vao->create();
+	pushMesh(mesh);
+	this->drewCount = drewCount;
+}
+
 void Model::pushMesh(Mesh* mesh)
 {
 	meshes.push_back(mesh);
+	vao->addVertexBuffer(mesh->vertexBuffer, mesh->layout);
 }
-void Model::render(Renderer* renderer)
+
+void Model::initModel()
 {
-	for (int i = 0; i < meshes.size(); i++)
-	{
-		meshes[i]->render(renderer);
-	}
+
 }
 
 //void Model::setMaterial(Material* material)

@@ -1,18 +1,23 @@
 #pragma once
 #include "Mesh.h"
+#include "VertexArrayObject.h"
 #include <vector>
+#include <string>
 class Renderer;
 class Mesh;
 
 class Model
 {
 public:
+	Model();
+	Model(Mesh* mesh,int drewCount);
+	VertexArrayObject* vao;
 	std::vector<Mesh*> meshes;
-	//Material* material;
+	int drewCount = 0;
 
 	void pushMesh(Mesh* mesh);
-	void render(Renderer* renderer);
-	//void setMaterial(Material* material);
+	void initModel();//initialize the model
+
 private:
 
 };

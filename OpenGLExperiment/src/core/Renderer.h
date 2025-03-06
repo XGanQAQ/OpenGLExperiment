@@ -6,27 +6,30 @@
 #include "ShaderProgram.h"
 #include "Scene.h"
 #include "..\include\GLFW\glfw3.h"
+#include "Material.h"
+#include "Camera.h"
+#include "SceneNode.h"
 
+class SceneNode;
 class Scene;
 
 class Renderer {
 public:
 	Renderer();
+    //std::vector<Texture*> textures
+    //FrameBuffer* frameBuffer;
+    Scene* mainScene;
+    Camera* mainCamera;
+
+
     void initialize();
-	void initialize(ShaderProgram* shaderProgram);
+    void render(ShaderProgram* shaderProgram, VertexArrayObject* vao);
+	void render(Model* model,Material* material);
+    void render(SceneNode* sceneNode);
     void render(Scene* scene);
     void render(GLFWwindow* window, double currentTime);
-    void setShaderProgram(ShaderProgram* shader);
-    void loadTexture(const std::string& path);
     //void bindFrameBuffer(FrameBuffer* fb)
 	void clearScreen();
-    void draw(VertexBuffer* vbo);
 
 private:
-    ShaderProgram* shaderProgram;
-    //std::vector<Texture*> textures
-	//FrameBuffer* frameBuffer;
-    VertexArrayObject* vao;
-    //Camera* camera
-
 };

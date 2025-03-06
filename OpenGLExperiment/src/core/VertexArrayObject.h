@@ -1,6 +1,8 @@
 #pragma once
 #include "..\include\GL\glew.h"
 #include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
+#include <map>
 
 class VertexArrayObject
 {
@@ -9,7 +11,7 @@ public:
 	void create();
 	void bind();
 	void unbind();
-	void addVertexBuffer(VertexBuffer* vbo);//const VertexBufferLayout& layout
+	void addVertexBuffer(VertexBuffer* vbo,VertexBufferElement element);
 
 private:
 

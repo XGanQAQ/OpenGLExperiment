@@ -15,18 +15,6 @@ void SceneNode::update(float deltaTime)
 	//}
 }
 
-void SceneNode::render(Renderer* renderer)
-{
-	if (model)
-	{
-		model->render(renderer);
-	}
-	for (auto child : children)
-	{
-		child->render(renderer);
-	}
-}
-
 
 void SceneNode::addChild(SceneNode* child)
 {
@@ -43,4 +31,38 @@ void SceneNode::removeChild(SceneNode* child)
 void SceneNode::setTransform(const glm::mat4& transform)
 {
 	this->transform = transform;
+}
+
+void SceneNode::initialize()
+{
+	//初始化子节点
+	for (auto child : children)
+	{
+		child->initialize();
+	}
+
+	if (model != nullptr)
+	{
+		model->initModel();
+	}
+	if (material!=nullptr)
+	{
+		material->initMaterial();
+	}
+}
+
+void SceneNode::initUniforms()
+{
+	if (material != nullptr)
+	{
+		Camera* camera = Scene::getMainCamera();
+
+		glm::mat4 pMat, vMat, mMat, mvMat;
+		pMat = camera->getProjectionMatrix();
+		vMat = camera->getViewMatrix();
+		mMat = transform * parent->transform;
+		mvMat = vMat * mMat;
+		material->shaderProgram->setUniform("mv_matrix", mvMat);
+		material->shaderProgram->setUniform("proj_matrix", pMat);
+	}
 }

@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\Application.cpp" />
+    <ClCompile Include="src\core\Camera.cpp" />
+    <ClCompile Include="src\core\Material.cpp" />
     <ClCompile Include="src\core\Mesh.cpp" />
     <ClCompile Include="src\core\Model.cpp" />
     <ClCompile Include="src\core\Renderer.cpp" />
@@ -28,13 +30,17 @@
     <ClCompile Include="src\core\ShaderProgram.cpp" />
     <ClCompile Include="src\core\VertexArrayObject.cpp" />
     <ClCompile Include="src\core\VertexBuffer.cpp" />
+    <ClCompile Include="src\objects\Cube.cpp" />
     <ClCompile Include="src\resources\ImportedModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\objects\Torus.cpp" />
     <ClCompile Include="src\tools\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NormalHeades.hpp" />
     <ClInclude Include="src\core\Application.h" />
+    <ClInclude Include="src\core\Camera.h" />
+    <ClInclude Include="src\core\Material.h" />
     <ClInclude Include="src\core\Mesh.h" />
     <ClInclude Include="src\core\Model.h" />
     <ClInclude Include="src\core\Renderer.h" />
@@ -42,6 +48,8 @@
     <ClInclude Include="src\core\SceneNode.h" />
     <ClInclude Include="src\core\ShaderProgram.h" />
     <ClInclude Include="src\core\VertexBuffer.h" />
+    <ClInclude Include="src\core\VertexBufferLayout.h" />
+    <ClInclude Include="src\objects\Cube.h" />
     <ClInclude Include="src\resources\ImportedModel.h" />
     <ClInclude Include="src\objects\Torus.h" />
     <ClInclude Include="src\tools\Utils.h" />

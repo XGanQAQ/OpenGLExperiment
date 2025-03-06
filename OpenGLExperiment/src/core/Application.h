@@ -24,8 +24,10 @@ public:
 	Renderer* renderer;
 	Scene* scene;
 
-	void initialize();
-	void initialize(int width, int height, Renderer* renderer, Scene* scene);
+	void initOpenGL(int width, int height);
+	void createScene();
+	void createRenderer();
+	void initSceneRenderer();
 	void run();
 	void processInput();
 	void cleanup();
