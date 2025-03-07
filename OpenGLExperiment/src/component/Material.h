@@ -1,8 +1,5 @@
 #pragma once
-#include <GL/glew.h>
-#include "ShaderProgram.h"
-#include "VertexArrayObject.h"
-#include "VertexBufferLayout.h"
+#include "../base/ShaderProgram.h"
 
 class Material
 {

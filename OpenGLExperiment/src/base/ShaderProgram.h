@@ -8,7 +8,7 @@
 class ShaderProgram
 {
 public:
-	GLuint programID;
+	GLuint programID = 0;
 	std::string vertexUrl;
 	std::string fragmentUrl;
 	std::unordered_map<std::string, GLint> uniformLocations;

@@ -1,17 +1,11 @@
 #pragma once
-#include <GL/glew.h>
-#include <vector>
-#include<string>
-#include "VertexArrayObject.h"
-#include "ShaderProgram.h"
+#include "../include/GL/glew.h"
+#include "../base/ShaderProgram.h"
 #include "Scene.h"
-#include "..\include\GLFW\glfw3.h"
-#include "Material.h"
-#include "Camera.h"
-#include "SceneNode.h"
-
-class SceneNode;
-class Scene;
+#include "../component/Material.h"
+#include "../component/Model.h"
+#include "../objects/Camera.h"
+#include "../objects/SceneNode.h"
 
 class Renderer {
 public:
@@ -23,11 +17,9 @@ public:
 
 
     void initialize();
-    void render(ShaderProgram* shaderProgram, VertexArrayObject* vao);
 	void render(Model* model,Material* material);
     void render(SceneNode* sceneNode);
     void render(Scene* scene);
-    void render(GLFWwindow* window, double currentTime);
     //void bindFrameBuffer(FrameBuffer* fb)
 	void clearScreen();
 

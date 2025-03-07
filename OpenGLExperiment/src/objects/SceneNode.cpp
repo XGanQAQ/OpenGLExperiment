@@ -1,11 +1,8 @@
-#include "..\include\GL\glew.h"
+
+#include "SceneNode.h"
 #include <glm\gtc\type_ptr.hpp>
 #include <glm\gtc\matrix_transform.hpp>
-#include <vector>
-
-#include "Model.h"
-#include "Renderer.h"
-#include "SceneNode.h"
+#include "../core/Scene.h"
 
 void SceneNode::update(float deltaTime)
 {

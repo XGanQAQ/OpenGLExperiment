@@ -1,11 +1,9 @@
 #include "Renderer.h"
 #include "../tools/Utils.h"
 #include <iostream>
-#include "Model.h"
-#include "Material.h"
+
 
 using namespace std;
-
 
 Renderer::Renderer()
 {

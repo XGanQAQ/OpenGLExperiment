@@ -1,7 +1,6 @@
 #pragma once
-#include "SceneNode.h"
-#include "Model.h"
-#include "Camera.h"
+#include "../objects/SceneNode.h"
+#include "../objects/Camera.h"
 #include <vector>
 class Scene
 {

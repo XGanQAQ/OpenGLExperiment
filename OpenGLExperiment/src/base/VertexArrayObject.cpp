@@ -1,7 +1,4 @@
-#include "..\include\GL\glew.h"
-#include "VertexBuffer.h"
 #include "VertexArrayObject.h"
-#include "VertexBufferLayout.h"
 #include <stdexcept>
 
 void VertexArrayObject::create()

@@ -1,13 +1,10 @@
 #pragma once
-#include "..\include\GL\glew.h"
-#include <glm\gtc\type_ptr.hpp>
-#include <glm\gtc\matrix_transform.hpp>
+#include "../include/GL/glew.h"
 #include <vector>
-#include "VertexArrayObject.h"
-#include "VertexBufferLayout.h"
-#include "Model.h"
-#include "Renderer.h"
-#include "Material.h"
+#include "../base/VertexArrayObject.h"
+#include "../base/VertexBufferElement.h"
+#include "../component/Model.h"
+#include "../component/Material.h"
 
 // Ç°ÏòÉùÃ÷
 class Model;
@@ -22,11 +19,11 @@ public:
 
 	std::string nodeName;
 	std::vector<SceneNode*> children;
-	SceneNode* parent;
+	SceneNode* parent = nullptr;
 	glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 
-	Model* model;
-	Material* material;
+	Model* model = nullptr;
+	Material* material = nullptr;
 
 	void update(float deltaTime);
 	void addChild(SceneNode* child);

@@ -1,10 +1,5 @@
-#include <GL\glew.h>
-#include <GLFW\glfw3.h>
-#include <unordered_map>
-#include <glm\gtc\type_ptr.hpp>
-#include <glm\gtc\matrix_transform.hpp>
-#include <iostream>
 #include "ShaderProgram.h"
+#include <iostream>
 #include <fstream>
 
 void ShaderProgram::compile_path(const char* vShaderFilePath, const char* fShaderFilePath)

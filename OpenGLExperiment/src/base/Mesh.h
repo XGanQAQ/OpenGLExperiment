@@ -1,8 +1,10 @@
 #pragma once
-#include "VertexBuffer.h"
-#include "VertexBufferLayout.h"
-class Renderer;
+#include "../base/VertexBuffer.h"
+#include "../base/VertexBufferElement.h"
 
+//This class is used to store the mesh data
+//It contains a vertex buffer and a layout
+//The layout is used to tell the renderer how to interpret the vertex buffer data
 class Mesh
 {
 public:

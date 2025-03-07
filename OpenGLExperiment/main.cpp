@@ -1,14 +1,10 @@
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <SOIL2/soil2.h>
-#include <string>
-#include <iostream>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "src/tools/Utils.h"
 #include "src/core/Application.h"
-#include "src/core/Camera.h"
-#include "src/core/VertexBufferLayout.h"
+#include <iostream>
+#include <string>
+
 using namespace std;
 
 void printTest(Scene* scene) {

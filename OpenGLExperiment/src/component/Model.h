@@ -1,6 +1,6 @@
 #pragma once
-#include "Mesh.h"
-#include "VertexArrayObject.h"
+#include "../base/Mesh.h"
+#include "../base/VertexArrayObject.h"
 #include <vector>
 #include <string>
 class Renderer;
