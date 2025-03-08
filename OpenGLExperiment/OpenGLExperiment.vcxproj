@@ -19,8 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\base\ElementBuffer.cpp" />
     <ClCompile Include="src\base\VertexBufferElement.cpp" />
+    <ClCompile Include="src\component\Sprite2D.cpp" />
     <ClCompile Include="src\core\Application.cpp" />
+    <ClCompile Include="src\objects\BaseNode.cpp" />
     <ClCompile Include="src\objects\Camera.cpp" />
     <ClCompile Include="src\component\Material.cpp" />
     <ClCompile Include="src\base\Mesh.cpp" />
@@ -31,7 +34,7 @@
     <ClCompile Include="src\base\ShaderProgram.cpp" />
     <ClCompile Include="src\base\VertexArrayObject.cpp" />
     <ClCompile Include="src\base\VertexBuffer.cpp" />
-    <ClCompile Include="src\tools\Geometry.cpp" />
+    <ClCompile Include="src\tools\GeometryGenerator.cpp" />
     <ClCompile Include="src\tools\ImportedModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\tools\Utils.cpp" />
@@ -44,7 +47,10 @@
     <ClInclude Include="include\GL\glxew.h" />
     <ClInclude Include="include\GL\wglew.h" />
     <ClInclude Include="src\base\baseAll.h" />
+    <ClInclude Include="src\base\ElementBuffer.h" />
+    <ClInclude Include="src\component\Sprite2D.h" />
     <ClInclude Include="src\core\Application.h" />
+    <ClInclude Include="src\objects\BaseNode.h" />
     <ClInclude Include="src\objects\Camera.h" />
     <ClInclude Include="src\component\Material.h" />
     <ClInclude Include="src\base\Mesh.h" />
@@ -55,10 +61,18 @@
     <ClInclude Include="src\base\ShaderProgram.h" />
     <ClInclude Include="src\base\VertexBuffer.h" />
     <ClInclude Include="src\base\VertexBufferElement.h" />
-    <ClInclude Include="src\tools\Geometry.h" />
+    <ClInclude Include="src\tools\GeometryGenerator.h" />
     <ClInclude Include="src\tools\ImportedModel.h" />
     <ClInclude Include="src\tools\Utils.h" />
     <ClInclude Include="src\base\VertexArrayObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="glew32.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\glew32.lib" />
+    <Library Include="lib\glfw3.lib" />
+    <Library Include="lib\soil2-debug.lib" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

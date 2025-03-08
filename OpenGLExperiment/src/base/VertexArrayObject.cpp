@@ -29,3 +29,10 @@ void VertexArrayObject::addVertexBuffer(VertexBuffer* vbo, VertexBufferElement e
 	vbo->unbind();
 	unbind();
 }
+
+void VertexArrayObject::addElementBuffer(ElementBuffer* ebo)
+{
+	bind();
+	ebo->bind();
+	unbind();
+}

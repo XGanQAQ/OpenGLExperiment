@@ -10,12 +10,18 @@ class Model
 {
 public:
 	Model();
-	Model(Mesh* mesh,int drewCount);
+	Model(Mesh* posMesh, std::vector<unsigned int> indices);
+	Model(Mesh* posMesh, Mesh* normalMesh, Mesh* texMesh, std::vector<unsigned int> indices);
 	VertexArrayObject* vao;
-	std::vector<Mesh*> meshes;
+	Mesh* positionMesh;
+	Mesh* normalMesh;
+	Mesh* texMesh;
+	std::vector<unsigned int> indices;
+	std::vector<Mesh*> otherMeshes;
 	int drewCount = 0;
 
-	void pushMesh(Mesh* mesh);
+	
+	void pushOtherMesh(Mesh* mesh);
 	void initModel();//initialize the model
 
 private:

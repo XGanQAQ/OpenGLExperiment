@@ -2,6 +2,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "src/tools/Utils.h"
 #include "src/core/Application.h"
+#include "src/tools/GeometryGenerator.h"
 #include <iostream>
 #include <string>
 
@@ -19,27 +20,6 @@ void CHECK_GL_ERROR(int a) {
 }
 
 
-float vertexPositions[108] = {
-	-1.0f,  1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f,
-	1.0f, -1.0f, -1.0f, 1.0f,  1.0f, -1.0f, -1.0f,  1.0f, -1.0f,
-	1.0f, -1.0f, -1.0f, 1.0f, -1.0f,  1.0f, 1.0f,  1.0f, -1.0f,
-	1.0f, -1.0f,  1.0f, 1.0f,  1.0f,  1.0f, 1.0f,  1.0f, -1.0f,
-	1.0f, -1.0f,  1.0f, -1.0f, -1.0f,  1.0f, 1.0f,  1.0f,  1.0f,
-	-1.0f, -1.0f,  1.0f, -1.0f,  1.0f,  1.0f, 1.0f,  1.0f,  1.0f,
-	-1.0f, -1.0f,  1.0f, -1.0f, -1.0f, -1.0f, -1.0f,  1.0f,  1.0f,
-	-1.0f, -1.0f, -1.0f, -1.0f,  1.0f, -1.0f, -1.0f,  1.0f,  1.0f,
-	-1.0f, -1.0f,  1.0f,  1.0f, -1.0f,  1.0f,  1.0f, -1.0f, -1.0f,
-	1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f,  1.0f,
-	-1.0f,  1.0f, -1.0f, 1.0f,  1.0f, -1.0f, 1.0f,  1.0f,  1.0f,
-	1.0f,  1.0f,  1.0f, -1.0f,  1.0f,  1.0f, -1.0f,  1.0f, -1.0f
-};
-
-float trianglePositions[9] = {
-	-0.6f, -0.6f, 0.0f,
-	0.6f, -0.6f, 0.0f,
-	0.0f, 0.6f, 0.0f
-};
-
 int main(void) {
 	Application app;
 	
@@ -55,24 +35,38 @@ int main(void) {
 	app.createScene();
 	app.createRenderer();
 
+	GeometryGenerator::MeshData cubeMeshData = GeometryGenerator::createCube(1.0f);
+	Mesh* cubePosMesh = GeometryGenerator::extractPositionMesh(cubeMeshData);
+	Model* cubeModel = new Model(cubePosMesh, cubeMeshData.indices);
+
+	GeometryGenerator::MeshData sphereMeshData = GeometryGenerator::createSphere(1.0f, 36, 18);
+	Mesh* spherePosMesh = GeometryGenerator::extractPositionMesh(sphereMeshData);
+	Model* sphereModel = new Model(spherePosMesh, sphereMeshData.indices);
+	GeometryGenerator::MeshData coneMeshData = GeometryGenerator::createCone(1.0f, 2.0f, 36);
+	Mesh* conePosMesh = GeometryGenerator::extractPositionMesh(coneMeshData);
+	Model* coneModel = new Model(conePosMesh, coneMeshData.indices);
+	GeometryGenerator::MeshData tetrahedronMeshData = GeometryGenerator::createTetrahedron(1.0f);
+	Mesh* tetrahedronPosMesh = GeometryGenerator::extractPositionMesh(tetrahedronMeshData);
+	Model* tetrahedronModel = new Model(tetrahedronPosMesh, tetrahedronMeshData.indices);
+
 	// 立方体
 	ShaderProgram* shaderProgram = new ShaderProgram("assets/shaders/1vertShader.glsl", "assets/shaders/1fragShader.glsl");
 	Material* material = new Material(shaderProgram);
-	Mesh* mesh = new Mesh(vertexPositions, 108*sizeof(float), {0,3,GL_FLOAT,GL_FALSE,0,0});
-	Model* cubeModel = new Model(mesh,108/3);
 	SceneNode* cubeNode = new SceneNode("cubeNode", cubeModel, material);
 	cubeNode->transform = glm::translate(glm::mat4(1.0f), glm::vec3(-2, -2, 0));
 	app.scene->addNode(cubeNode);
-	
-	// 立方体
-	//ShaderProgram* shaderProgram2 = new ShaderProgram("assets/shaders/1vertShader.glsl", "assets/shaders/1fragShader.glsl");
-	//Material* material2 = new Material(shaderProgram2);
-	//Mesh* mesh2 = new Mesh(vertexPositions, 108 * sizeof(float), { 0,3,GL_FLOAT,GL_FALSE,0,0 });
-	//Model* cubeModel2 = new Model(mesh, 108 / 3);
-	SceneNode* cubeNode2 = new SceneNode("cubeNode2", cubeModel, material);
-	cubeNode2->transform = glm::translate(glm::mat4(1.0f), glm::vec3(2, 2, 0));
-	//app.scene->addNode(cubeNode2);
-	cubeNode->addChild(cubeNode2);
+
+	SceneNode* sphereNode = new SceneNode("sphereNode", sphereModel, material);
+	sphereNode->transform = glm::translate(glm::mat4(1.0f), glm::vec3(2, 2, 0));
+	app.scene->addNode(sphereNode);
+
+	SceneNode* coneNode = new SceneNode("coneNode", coneModel, material);
+	coneNode->transform = glm::translate(glm::mat4(1.0f), glm::vec3(-2, 2, 0));
+	app.scene->addNode(coneNode);
+
+	SceneNode* tetrahedronNode = new SceneNode("tetrahedronNode", tetrahedronModel, material);
+	tetrahedronNode->transform = glm::translate(glm::mat4(1.0f), glm::vec3(2, -2, 0));
+	app.scene->addNode(tetrahedronNode);
 
 
 	app.scene->setMainCamera(&camera);

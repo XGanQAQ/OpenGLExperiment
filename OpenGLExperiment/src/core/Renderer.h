@@ -17,9 +17,10 @@ public:
 
 
     void initialize();
-	void render(Model* model,Material* material);
-    void render(SceneNode* sceneNode);
     void render(Scene* scene);
+    void render(SceneNode* sceneNode);
+	void render_Array(Model* model,Material* material);
+    void render_Element(Model* model, Material* material);
     //void bindFrameBuffer(FrameBuffer* fb)
 	void clearScreen();
 

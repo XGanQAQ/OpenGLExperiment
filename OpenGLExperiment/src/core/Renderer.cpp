@@ -22,7 +22,7 @@ void checkShaderAtrrib(GLint shaderID) {
 	}
 }
 
-void Renderer::render(Model* model, Material* material)
+void Renderer::render_Array(Model* model, Material* material)
 {
 	material->shaderProgram->use();
 
@@ -31,6 +31,25 @@ void Renderer::render(Model* model, Material* material)
 
 	//std::cout << "Draw count: " << model->drewCount << std::endl;
 	glDrawArrays(GL_TRIANGLES, 0, model->drewCount);
+
+	model->vao->unbind();
+
+	material->shaderProgram->unuse();
+
+	GLenum err;
+	while ((err = glGetError()) != GL_NO_ERROR) {
+		std::cerr << "OpenGL error at " << "render" << ": " << err << std::endl;
+	}
+}
+
+void Renderer::render_Element(Model* model, Material* material)
+{
+	material->shaderProgram->use();
+
+	model->vao->bind();
+	//checkShaderAtrrib(material->shaderProgram->programID); //检查是否有position属性
+
+	glDrawElements(GL_TRIANGLES, model->drewCount, GL_UNSIGNED_INT, 0);
 
 	model->vao->unbind();
 
@@ -51,7 +70,7 @@ void Renderer::render(SceneNode* sceneNode)
 	// 渲染当前节点
 	if (sceneNode->model != nullptr && sceneNode->material!=nullptr) {
 		sceneNode->initUniforms();
-		render(sceneNode->model, sceneNode->material);
+		render_Element(sceneNode->model, sceneNode->material);
 	}
 }
 
