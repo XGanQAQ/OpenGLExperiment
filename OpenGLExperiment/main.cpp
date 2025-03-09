@@ -53,23 +53,24 @@ int main(void) {
 	ShaderProgram* shaderProgram = new ShaderProgram("assets/shaders/1vertShader.glsl", "assets/shaders/1fragShader.glsl");
 	Material* material = new Material(shaderProgram);
 	SceneNode* cubeNode = new SceneNode("cubeNode", cubeModel, material);
-	cubeNode->transform = glm::translate(glm::mat4(1.0f), glm::vec3(-2, -2, 0));
+	cubeNode->setPosition(glm::vec3(-2,2,0));
 	app.scene->addNode(cubeNode);
 
 	SceneNode* sphereNode = new SceneNode("sphereNode", sphereModel, material);
-	sphereNode->transform = glm::translate(glm::mat4(1.0f), glm::vec3(2, 2, 0));
+	sphereNode->setPosition(glm::vec3(2, 2, 0));
 	app.scene->addNode(sphereNode);
 
 	SceneNode* coneNode = new SceneNode("coneNode", coneModel, material);
-	coneNode->transform = glm::translate(glm::mat4(1.0f), glm::vec3(-2, 2, 0));
+	coneNode->setPosition(glm::vec3(-2, -2, 0));
 	app.scene->addNode(coneNode);
 
 	SceneNode* tetrahedronNode = new SceneNode("tetrahedronNode", tetrahedronModel, material);
-	tetrahedronNode->transform = glm::translate(glm::mat4(1.0f), glm::vec3(2, -2, 0));
+	tetrahedronNode->setPosition(glm::vec3(2, -2, 0));
 	app.scene->addNode(tetrahedronNode);
 
 
 	app.scene->setMainCamera(&camera);
+	app.scene->addNode(&camera);
 
 	app.initSceneRenderer();
 

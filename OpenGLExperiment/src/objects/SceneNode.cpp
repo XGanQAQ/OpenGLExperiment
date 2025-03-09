@@ -3,39 +3,12 @@
 #include <glm\gtc\type_ptr.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 #include "../core/Scene.h"
-
-void SceneNode::update(float deltaTime)
-{
-	//for (auto child : children)
-	//{
-	//	child->update(deltaTime);
-	//}
-}
-
-
-void SceneNode::addChild(SceneNode* child)
-{
-	children.push_back(child);
-	child->parent = this;
-}
-
-void SceneNode::removeChild(SceneNode* child)
-{
-	children.erase(std::remove(children.begin(), children.end(), child), children.end());
-	child->parent = nullptr;
-}
-
-void SceneNode::setTransform(const glm::mat4& transform)
-{
-	this->transform = transform;
-}
-
-void SceneNode::initialize()
+void SceneNode::initNode()
 {
 	//初始化子节点
 	for (auto child : children)
 	{
-		child->initialize();
+		child->initNode();
 	}
 
 	if (model != nullptr)
@@ -57,7 +30,7 @@ void SceneNode::initUniforms()
 		glm::mat4 pMat, vMat, mMat, mvMat;
 		pMat = camera->getProjectionMatrix();
 		vMat = camera->getViewMatrix();
-		mMat = transform * parent->transform;
+		mMat = getTransform() * parent->getTransform();
 		mvMat = vMat * mMat;
 		material->shaderProgram->setUniform("mv_matrix", mvMat);
 		material->shaderProgram->setUniform("proj_matrix", pMat);

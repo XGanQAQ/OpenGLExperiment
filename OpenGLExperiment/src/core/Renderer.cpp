@@ -61,16 +61,18 @@ void Renderer::render_Element(Model* model, Material* material)
 	}
 }
 
-void Renderer::render(SceneNode* sceneNode)
+void Renderer::render(BaseNode* sceneNode)
 {
 	// 递归渲染子节点
-	for (SceneNode* child : sceneNode->children) {
+	for (BaseNode* child : sceneNode->children) {
 		render(child);
 	}
+
 	// 渲染当前节点
-	if (sceneNode->model != nullptr && sceneNode->material!=nullptr) {
-		sceneNode->initUniforms();
-		render_Element(sceneNode->model, sceneNode->material);
+	SceneNode* node = dynamic_cast<SceneNode*>(sceneNode);
+	if (node != nullptr && node->model != nullptr && node->material != nullptr) {
+		node->initUniforms();
+		render_Element(node->model, node->material);
 	}
 }
 

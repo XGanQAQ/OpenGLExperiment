@@ -5,22 +5,22 @@
 class Scene
 {
 public:
-	SceneNode* rootNode;
+	BaseNode* rootNode;
 	static Camera* mainCamera;
 	
 	Scene() {
-		rootNode = new SceneNode("rootNode");
+		rootNode = new BaseNode("rootNode");
 	}
-	Scene(SceneNode* rootNode) :rootNode(rootNode) {}
+	Scene(BaseNode* rootNode) :rootNode(rootNode) {}
 	void initialize();
 
 	void update(float deltaTime);
-	void addNode(SceneNode* node); //给rootNode添加子节点
-	void removeNode(SceneNode* node);
+	void addNode(BaseNode* node); //给rootNode添加子节点
+	void removeNode(BaseNode* node);
 	//void addLight(Light* light);
 	void setMainCamera(Camera* camera);
 	static Camera* getMainCamera();
-	void printSceneTree(int depth,SceneNode* node);
+	void printSceneTree(int depth, BaseNode* node);
 private:
 
 };
