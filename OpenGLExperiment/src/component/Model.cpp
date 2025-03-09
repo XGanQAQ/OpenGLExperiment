@@ -43,7 +43,14 @@ void Model::pushOtherMesh(Mesh* mesh)
 
 void Model::initModel()
 {
-
+	if (shaderProgram!=nullptr)
+	{
+		shaderProgram->compile();
+	}
+	if (texture!=nullptr)
+	{
+		texture->bind(0); //暂时将基本纹理设置为0
+	}
 }
 
 //void Model::setMaterial(Material* material)

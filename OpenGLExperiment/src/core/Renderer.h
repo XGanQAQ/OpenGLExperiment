@@ -20,6 +20,7 @@ public:
     void render(Scene* scene);
     void render(BaseNode* sceneNode);
 	void render_Array(Model* model,Material* material);
+    void render_Element(Model* model);
     void render_Element(Model* model, Material* material);
     //void bindFrameBuffer(FrameBuffer* fb)
 	void clearScreen();

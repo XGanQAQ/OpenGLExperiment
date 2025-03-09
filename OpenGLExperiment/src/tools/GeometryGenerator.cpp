@@ -214,3 +214,26 @@ Mesh* GeometryGenerator::extractPositionMesh(const MeshData& meshData)
 	Mesh* mesh = new Mesh(positionData.data(), positionData.size() * sizeof(float), { 0,3,GL_FLOAT,GL_FALSE,0,0 });
 	return mesh;
 }
+
+Mesh* GeometryGenerator::extractNormalMesh(const MeshData& meshData)
+{
+	std::vector<float> normalData;
+	for (const Vertex& vertex : meshData.vertices) {
+		normalData.push_back(vertex.normal.x);
+		normalData.push_back(vertex.normal.y);
+		normalData.push_back(vertex.normal.z);
+	}
+	Mesh* mesh = new Mesh(normalData.data(), normalData.size() * sizeof(float), { 1,3,GL_FLOAT,GL_FALSE,0,0 });
+	return mesh;
+}
+
+Mesh* GeometryGenerator::extractTexMesh(const MeshData& meshData)
+{
+	std::vector<float> texData;
+	for (const Vertex& vertex : meshData.vertices) {
+		texData.push_back(vertex.texCoord.x);
+		texData.push_back(vertex.texCoord.y);
+	}
+	Mesh* mesh = new Mesh(texData.data(), texData.size() * sizeof(float), { 2,2,GL_FLOAT,GL_FALSE,0,0 });
+	return mesh;
+}

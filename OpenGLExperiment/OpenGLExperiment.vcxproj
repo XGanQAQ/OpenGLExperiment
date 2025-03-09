@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base\ElementBuffer.cpp" />
+    <ClCompile Include="src\base\Texture.cpp" />
     <ClCompile Include="src\base\VertexBufferElement.cpp" />
     <ClCompile Include="src\component\Sprite2D.cpp" />
     <ClCompile Include="src\core\Application.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="include\GL\wglew.h" />
     <ClInclude Include="src\base\baseAll.h" />
     <ClInclude Include="src\base\ElementBuffer.h" />
+    <ClInclude Include="src\base\Texture.h" />
     <ClInclude Include="src\component\Sprite2D.h" />
     <ClInclude Include="src\core\Application.h" />
     <ClInclude Include="src\objects\BaseNode.h" />

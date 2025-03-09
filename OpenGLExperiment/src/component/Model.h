@@ -1,6 +1,8 @@
 #pragma once
 #include "../base/Mesh.h"
 #include "../base/VertexArrayObject.h"
+#include "../base/ShaderProgram.h"
+#include "../base/Texture.h"
 #include <vector>
 #include <string>
 class Renderer;
@@ -20,6 +22,9 @@ public:
 	std::vector<Mesh*> otherMeshes;
 	int drewCount = 0;
 
+	ShaderProgram* shaderProgram=nullptr;
+	Texture* texture=nullptr;
+	
 	
 	void pushOtherMesh(Mesh* mesh);
 	void initModel();//initialize the model

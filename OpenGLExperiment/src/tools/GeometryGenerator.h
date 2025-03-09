@@ -25,7 +25,8 @@ public:
 	static std::vector<float> extractPositionData(const MeshData& meshData);
     //把Vertex的position数据提取出来，返回一个Mesh
 	static Mesh* extractPositionMesh(const MeshData& meshData);
-
+	static Mesh* extractNormalMesh(const MeshData& meshData);
+	static Mesh* extractTexMesh(const MeshData& meshData);
 private:
     static void buildSphereVertices(MeshData& meshData, float radius, int sectorCount, int stackCount);
 };

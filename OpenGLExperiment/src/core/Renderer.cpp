@@ -42,10 +42,27 @@ void Renderer::render_Array(Model* model, Material* material)
 	}
 }
 
+void Renderer::render_Element(Model* model)
+{
+	if (model->shaderProgram==nullptr)
+	{
+		std::cerr <<"The model shaderProgram is null" << std::endl;
+		return;
+	}
+	model->shaderProgram->use();
+	model->vao->bind();
+	glDrawElements(GL_TRIANGLES, model->drewCount, GL_UNSIGNED_INT, 0);
+	model->vao->unbind();
+	model->shaderProgram->unuse();
+	GLenum err;
+	while ((err = glGetError()) != GL_NO_ERROR) {
+		std::cerr << "OpenGL error at " << "render" << ": " << err << std::endl;
+	}
+}
+
 void Renderer::render_Element(Model* model, Material* material)
 {
-	material->shaderProgram->use();
-
+	material->useMaterial();
 	model->vao->bind();
 	//checkShaderAtrrib(material->shaderProgram->programID); //检查是否有position属性
 
