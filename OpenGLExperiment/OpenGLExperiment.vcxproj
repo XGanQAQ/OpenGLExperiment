@@ -19,6 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\imgui\imgui.cpp" />
+    <ClCompile Include="include\imgui\imgui_demo.cpp" />
+    <ClCompile Include="include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="include\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="include\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="include\imgui\imgui_tables.cpp" />
+    <ClCompile Include="include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\base\ElementBuffer.cpp" />
     <ClCompile Include="src\base\Texture.cpp" />
     <ClCompile Include="src\base\VertexBufferElement.cpp" />
@@ -39,6 +46,8 @@
     <ClCompile Include="src\tools\ImportedModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\tools\Utils.cpp" />
+    <ClCompile Include="src\ui\ImGuiUI.cpp" />
+    <ClCompile Include="src\ui\NodeTreeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GLFW\glfw3.h" />
@@ -47,6 +56,15 @@
     <ClInclude Include="include\GL\glew.h" />
     <ClInclude Include="include\GL\glxew.h" />
     <ClInclude Include="include\GL\wglew.h" />
+    <ClInclude Include="include\imgui\imconfig.h" />
+    <ClInclude Include="include\imgui\imgui.h" />
+    <ClInclude Include="include\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="include\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="include\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="include\imgui\imgui_internal.h" />
+    <ClInclude Include="include\imgui\imstb_rectpack.h" />
+    <ClInclude Include="include\imgui\imstb_textedit.h" />
+    <ClInclude Include="include\imgui\imstb_truetype.h" />
     <ClInclude Include="src\base\baseAll.h" />
     <ClInclude Include="src\base\ElementBuffer.h" />
     <ClInclude Include="src\base\Texture.h" />
@@ -67,6 +85,8 @@
     <ClInclude Include="src\tools\ImportedModel.h" />
     <ClInclude Include="src\tools\Utils.h" />
     <ClInclude Include="src\base\VertexArrayObject.h" />
+    <ClInclude Include="src\ui\ImGuiUI.h" />
+    <ClInclude Include="src\ui\NodeTreeManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glew32.dll" />
@@ -75,6 +95,9 @@
     <Library Include="lib\glew32.lib" />
     <Library Include="lib\glfw3.lib" />
     <Library Include="lib\soil2-debug.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\font\FiraCode-VariableFont_wght.ttf" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -169,14 +192,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\GanX\OpenGLtemplate\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IncrementalLinkDatabaseFile>$(IntDir)$(TargetName).ilk;</IncrementalLinkDatabaseFile>
       <AdditionalDependencies>glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib;%(AdditionalDependencies);glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib;glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:\GanX\OpenGLtemplate\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -187,7 +210,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\GanX\OpenGLtemplate\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories);include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -195,8 +218,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IncrementalLinkDatabaseFile>$(IntDir)$(TargetName).ilk;</IncrementalLinkDatabaseFile>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib;glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib;glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:\GanX\OpenGLtemplate\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies);glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib;glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib;glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib;glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib;glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib;glfw3.lib;glew32.lib;soil2-debug.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

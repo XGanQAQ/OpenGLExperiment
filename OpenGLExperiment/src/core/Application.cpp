@@ -60,6 +60,23 @@ void Application::createRenderer()
 	renderer = new Renderer();
 }
 
+void Application::createUI()
+{
+	ui = new ImGuiUI(window);
+}
+
+void Application::createNodeTreeManager(BaseNode* rootNode)
+{
+	if (ui != nullptr)
+	{
+		ui->createNodeTreeManager(rootNode);
+	}
+	else
+	{
+		std::cout << "UI is not initialized" << std::endl;
+	}
+}
+
 void Application::initSceneRenderer()
 {	
 	renderer->initialize();
@@ -68,13 +85,64 @@ void Application::initSceneRenderer()
 
 void Application::run() {
 	// Loop until the user closes the window
+	bool isUiReady = false;
+	bool isSceneReady = false;
+	bool isRendererReady = false;
+	if (ui!=nullptr)
+	{
+		isUiReady = true;
+	}
+	if (scene != nullptr)
+	{
+		isSceneReady = true;
+	}
+	if (renderer != nullptr)
+	{
+		isRendererReady = true;
+	}
+
+	if (isUiReady)
+	{
+		std::cout << "UI is Ready" << std::endl;
+	}
+	if (isSceneReady)
+	{
+		std::cout << "Scene is Ready" << std::endl;
+	}
+	if (isRendererReady)
+	{
+		std::cout << "Renderer is Ready" << std::endl;
+	}
+
 	while (!glfwWindowShouldClose(window))
 	{
 		// Process input
 		processInput();
 
 		// Render here
-		renderer->render(scene);
+		if (isRendererReady&&isSceneReady)
+		{
+			renderer->render(scene);
+		}
+
+		// UI
+		if (isUiReady)
+		{
+			// 开始 ImGUI 帧
+			ui->beginFrame();
+
+			// 显示示例窗口
+			//ui->showExampleWindow();
+
+			if (ui->isNodeTreeManagerInitialized())
+			{
+				ui->showNodeTreeWindow();
+				ui->showAttributeWindow();
+			}
+
+			// 结束 ImGUI 帧并渲染
+			ui->endFrame();
+		}
 
 		// Swap front and back buffers
 		glfwSwapBuffers(window);

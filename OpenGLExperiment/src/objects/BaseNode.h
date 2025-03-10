@@ -11,8 +11,10 @@ public:
 	BaseNode(std::string nodeName = "UnnamedNode") : nodeName(nodeName) {}
 
 	std::string nodeName;
-	std::vector<BaseNode*> children;
+	unsigned int id; // 唯一标识符
+
 	BaseNode* parent = nullptr;
+	std::vector<BaseNode*> children;
 
 	glm::vec3 position = glm::vec3(0, 0, 0);
 	glm::vec3 rotation = glm::vec3(0, 0, 0);
@@ -31,5 +33,5 @@ public:
 	void removeChild(BaseNode* child);
 	virtual void initNode(); 
 private:
-
+	static unsigned int nodeCounter; // 静态计数器
 };

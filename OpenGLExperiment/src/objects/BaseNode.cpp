@@ -1,4 +1,6 @@
 #include "BaseNode.h"
+unsigned int BaseNode::nodeCounter = 0;
+
 glm::mat4 BaseNode::getTransform()
 {
 	glm::mat4 posMat = glm::translate(glm::mat4(1.0f), position);

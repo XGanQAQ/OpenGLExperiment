@@ -1,11 +1,12 @@
 #pragma once
-#include "..\include\GL\glew.h"
-#include "..\include\GLFW\glfw3.h"
-#include "..\include\SOIL2\soil2.h"
-#include "..\include\glm\gtc\type_ptr.hpp"
-#include "..\include\glm\gtc\matrix_transform.hpp"
+#include "GL/glew.h"
+#include "GLFW/glfw3.h"
+#include "SOIL2/soil2.h"
+#include "glm/gtc/type_ptr.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 #include "Renderer.h"
 #include "Scene.h"
+#include "../ui/ImGuiUI.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -23,10 +24,13 @@ public:
 	bool isRunning;
 	Renderer* renderer;
 	Scene* scene;
+	ImGuiUI* ui;
 
 	void initOpenGL(int width, int height);
 	void createScene();
 	void createRenderer();
+	void createUI();
+	void createNodeTreeManager(BaseNode* rootNode);
 	void initSceneRenderer();
 	void run();
 	void processInput();

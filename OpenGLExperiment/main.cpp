@@ -35,10 +35,12 @@ int main(void) {
 		100.0f);                      // 远裁剪面
 
 
-	app.initOpenGL(1000,800); //必须在所有初始化之前，包含opengl上下文的设置
+	app.initOpenGL(1920,1080); //必须在所有初始化之前，包含opengl上下文的设置
 
 	app.createScene();
 	app.createRenderer();
+	app.createUI();
+	app.createNodeTreeManager(app.scene->rootNode);
 	//——————————————————生成模型
 	//导入的模型
 	ImportedModel model = ImportedModel("assets/models/pyr.obj");
