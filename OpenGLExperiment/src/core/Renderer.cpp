@@ -22,19 +22,18 @@ void checkShaderAtrrib(GLint shaderID) {
 	}
 }
 
+//渲染一个模型，使用模型和材质，采用顶点数组直接渲染
 void Renderer::render_Array(Model* model, Material* material)
 {
-	material->shaderProgram->use();
-
+	material->useMaterial();
 	model->vao->bind();
-	checkShaderAtrrib(material->shaderProgram->programID);
 
 	//std::cout << "Draw count: " << model->drewCount << std::endl;
 	glDrawArrays(GL_TRIANGLES, 0, model->drewCount);
 
 	model->vao->unbind();
 
-	material->shaderProgram->unuse();
+	material->unuseMaterial();
 
 	GLenum err;
 	while ((err = glGetError()) != GL_NO_ERROR) {
@@ -42,6 +41,7 @@ void Renderer::render_Array(Model* model, Material* material)
 	}
 }
 
+//渲染一个模型，使用模型自己包含，采用索引渲染
 void Renderer::render_Element(Model* model)
 {
 	if (model->shaderProgram==nullptr)
@@ -60,6 +60,7 @@ void Renderer::render_Element(Model* model)
 	}
 }
 
+//渲染一个模型,使用模型和材质，采用索引渲染
 void Renderer::render_Element(Model* model, Material* material)
 {
 	material->useMaterial();
@@ -69,8 +70,7 @@ void Renderer::render_Element(Model* model, Material* material)
 	glDrawElements(GL_TRIANGLES, model->drewCount, GL_UNSIGNED_INT, 0);
 
 	model->vao->unbind();
-
-	material->shaderProgram->unuse();
+	material->unuseMaterial();
 
 	GLenum err;
 	while ((err = glGetError()) != GL_NO_ERROR) {
@@ -87,9 +87,12 @@ void Renderer::render(BaseNode* sceneNode)
 
 	// 渲染当前节点
 	SceneNode* node = dynamic_cast<SceneNode*>(sceneNode);
-	if (node != nullptr && node->model != nullptr && node->material != nullptr) {
+	if (node != nullptr) {
 		node->initUniforms();
-		render_Element(node->model, node->material);
+		if(!node->model->indices.empty())
+			render_Element(node->model, node->material);
+		else
+			render_Array(node->model, node->material);
 	}
 }
 

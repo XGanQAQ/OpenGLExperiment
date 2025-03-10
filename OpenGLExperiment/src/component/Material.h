@@ -16,6 +16,7 @@ public:
 
 	void initMaterial();
 	void useMaterial();
+	void unuseMaterial();
 private:
 
 };

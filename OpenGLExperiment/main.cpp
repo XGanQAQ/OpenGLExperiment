@@ -5,6 +5,7 @@
 #include "src/tools/GeometryGenerator.h"
 #include <iostream>
 #include <string>
+#include "src/tools/ImportedModel.h"
 
 using namespace std;
 
@@ -31,9 +32,17 @@ int main(void) {
 		0.1f,                         // 近裁剪面
 		100.0f);                      // 远裁剪面
 
+
 	app.initOpenGL(800,600); //必须在所有初始化之前，包含opengl上下文的设置
 	app.createScene();
 	app.createRenderer();
+	//——————————————————生成模型
+	//导入的模型
+	ImportedModel model = ImportedModel("assets/models/pyr.obj");
+	Mesh* importedPosMesh = model.getPosMesh();
+	Mesh* importedNormalMesh = model.getNormalMesh();
+	Mesh* importedTexMesh = model.getTexMesh();
+	Model* importedModel = new Model(importedPosMesh, importedNormalMesh, importedTexMesh, model.getNumVertices());
 
 	GeometryGenerator::MeshData cubeMeshData = GeometryGenerator::createCube(1.0f);
 	Mesh* cubePosMesh = GeometryGenerator::extractPositionMesh(cubeMeshData);
@@ -59,19 +68,23 @@ int main(void) {
 	Mesh* tetrahedronTexMesh = GeometryGenerator::extractTexMesh(tetrahedronMeshData);
 	Model* tetrahedronModel = new Model(tetrahedronPosMesh, tetrahedronNormalMesh, tetrahedronTexMesh, tetrahedronMeshData.indices);
 
+	//——————————————————设置材质
 	//基础材质
 	ShaderProgram* shaderProgram = new ShaderProgram("assets/shaders/1vertShader.glsl", "assets/shaders/1fragShader.glsl");
 	Material* material = new Material(shaderProgram);
-
 	//纹理材质1
 	ShaderProgram* shaderProgram_texture = new ShaderProgram("assets/shaders/TexVShader.glsl", "assets/shaders/TexFShader.glsl");
 	Texture* texture = new Texture("assets/textures/brick1.jpg");
 	Material* material_texture = new Material(shaderProgram_texture, texture);
-
 	//纹理材质2 图片和1不同
 	ShaderProgram* shaderProgram_texture2 = new ShaderProgram("assets/shaders/TexVShader.glsl", "assets/shaders/TexFShader.glsl");
 	Texture* texture2 = new Texture("assets/textures/brick1upArrow.jpg");
 	Material* material_texture2 = new Material(shaderProgram_texture2, texture2);
+
+	//——————————————————构造添加节点
+	SceneNode* importedModelNode = new SceneNode("importedModelNode", importedModel, material_texture);
+	importedModelNode->setPosition(glm::vec3(0, 0, 0));
+	app.scene->addNode(importedModelNode);
 
 	SceneNode* cubeNode = new SceneNode("cubeNode", cubeModel, material_texture);
 	cubeNode->setPosition(glm::vec3(-2,2,0));
@@ -89,14 +102,17 @@ int main(void) {
 	tetrahedronNode->setPosition(glm::vec3(2, -2, 0));
 	app.scene->addNode(tetrahedronNode);
 
-
+	//——————————————————设置相机
 	app.scene->setMainCamera(&camera);
 	app.scene->addNode(&camera);
 
+	//——————————————————初始化渲染器
 	app.initSceneRenderer();
 
+	//——————————————————打印场景树
 	printTest(app.scene);
 
+	//——————————————————运行
 	app.run();
 	app.cleanup();
 

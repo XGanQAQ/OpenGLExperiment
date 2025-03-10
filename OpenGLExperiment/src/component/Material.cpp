@@ -18,3 +18,12 @@ void Material::useMaterial()
 	}
 }
 
+void Material::unuseMaterial()
+{
+	shaderProgram->unuse();
+	if (texture != nullptr)
+	{
+		texture->unbind();
+	}
+}
+

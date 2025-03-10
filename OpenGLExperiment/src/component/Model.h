@@ -12,8 +12,8 @@ class Model
 {
 public:
 	Model();
-	Model(Mesh* posMesh, std::vector<unsigned int> indices);
-	Model(Mesh* posMesh, Mesh* normalMesh, Mesh* texMesh, std::vector<unsigned int> indices);
+	Model(Mesh* posMesh, Mesh* normalMesh, Mesh* texMesh, int drewCount); //无索引模型
+	Model(Mesh* posMesh, Mesh* normalMesh, Mesh* texMesh, std::vector<unsigned int> indices); //有索引模型
 	VertexArrayObject* vao;
 	Mesh* positionMesh;
 	Mesh* normalMesh;

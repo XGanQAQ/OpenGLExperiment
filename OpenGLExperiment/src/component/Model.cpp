@@ -7,17 +7,30 @@ Model::Model()
 	vao->create();
 }
 
-Model::Model(Mesh* posMesh, std::vector<unsigned int> indices)
+Model::Model(Mesh* posMesh, Mesh* normalMesh, Mesh* texMesh, int drewCount)
 {
 	vao = new VertexArrayObject();
 	vao->create();
-	ElementBuffer* ebo = new ElementBuffer(indices.data(), indices.size());
-	vao->addElementBuffer(ebo);
 	this->positionMesh = posMesh;
-	vao->addVertexBuffer(posMesh->vertexBuffer,posMesh->layout);
-	this->indices = indices;
-	this->drewCount = ebo->getCount();
+	this->normalMesh = normalMesh;
+	this->texMesh = texMesh;
+	vao->addVertexBuffer(posMesh->vertexBuffer, posMesh->layout);
+	vao->addVertexBuffer(normalMesh->vertexBuffer, normalMesh->layout);
+	vao->addVertexBuffer(texMesh->vertexBuffer, texMesh->layout);
+	this->drewCount = drewCount;
 }
+
+//Model::Model(Mesh* posMesh, std::vector<unsigned int> indices)
+//{
+//	vao = new VertexArrayObject();
+//	vao->create();
+//	ElementBuffer* ebo = new ElementBuffer(indices.data(), indices.size());
+//	vao->addElementBuffer(ebo);
+//	this->positionMesh = posMesh;
+//	vao->addVertexBuffer(posMesh->vertexBuffer,posMesh->layout);
+//	this->indices = indices;
+//	this->drewCount = ebo->getCount();
+//}
 
 Model::Model(Mesh* posMesh, Mesh* normalMesh, Mesh* texMesh, std::vector<unsigned int> indices)
 {

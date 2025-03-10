@@ -1,5 +1,5 @@
 #include <vector>
-
+#include "../base/Mesh.h"
 class ImportedModel
 {
 private:
@@ -14,6 +14,12 @@ public:
 	std::vector<glm::vec3> getVertices();
 	std::vector<glm::vec2> getTextureCoords();
 	std::vector<glm::vec3> getNormals();
+
+	Mesh* getPosMesh();
+	Mesh* getNormalMesh();
+	Mesh* getTexMesh();
+	static float* getVerticesArray(std::vector<glm::vec3> vertices);
+	static float* getVerticesArray(std::vector<glm::vec2> vertices);
 };
 
 class ModelImporter

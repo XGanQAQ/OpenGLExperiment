@@ -26,6 +26,63 @@ std::vector<glm::vec3> ImportedModel::getVertices() { return vertices; }
 std::vector<glm::vec2> ImportedModel::getTextureCoords() { return texCoords; }
 std::vector<glm::vec3> ImportedModel::getNormals() { return normalVecs; }
 
+Mesh* ImportedModel::getPosMesh()
+{
+	if (vertices.size() > 0) {
+		float* verts = getVerticesArray(vertices);
+		return new Mesh(verts, vertices.size() * 3 * sizeof(float), { 0, 3, GL_FLOAT, GL_FALSE, 0, 0 });
+	}
+	else return nullptr;
+}
+
+Mesh* ImportedModel::getNormalMesh()
+{
+	if (normalVecs.size() > 0) {
+		float* norms = getVerticesArray(normalVecs);
+		return new Mesh(norms, normalVecs.size() * 3 * sizeof(float), { 1, 3, GL_FLOAT, GL_FALSE, 0, 0 });
+	}
+	else return nullptr;
+}
+
+Mesh* ImportedModel::getTexMesh()
+{
+	if (texCoords.size() > 0) {
+		float* tcs = getVerticesArray(texCoords);
+		return new Mesh(tcs, texCoords.size() * 2 * sizeof(float), { 2, 2, GL_FLOAT, GL_FALSE, 0, 0 });
+	}
+	else
+	return nullptr;
+}
+
+float* ImportedModel::getVerticesArray(std::vector<glm::vec3> vertices)
+{
+	if (vertices.size() > 0) {
+		float* verts = new float[vertices.size() * 3];
+		for (int i = 0; i < vertices.size(); i++) {
+			verts[i * 3] = vertices[i].x;
+			verts[i * 3 + 1] = vertices[i].y;
+			verts[i * 3 + 2] = vertices[i].z;
+		}
+		return verts;
+	}
+	else {
+		return nullptr;
+	}
+}
+
+float* ImportedModel::getVerticesArray(std::vector<glm::vec2> vertices) {
+	if (vertices.size() > 0) {
+		float* verts = new float[vertices.size() * 2];
+		for (int i = 0; i < vertices.size(); i++) {
+			verts[i * 2] = vertices[i].x;
+			verts[i * 2 + 1] = vertices[i].y;
+		}
+		return verts;
+	}
+	else {
+		return nullptr;
+	}
+}
 // ---------------------------------------------------------------
 
 ModelImporter::ModelImporter() {}
