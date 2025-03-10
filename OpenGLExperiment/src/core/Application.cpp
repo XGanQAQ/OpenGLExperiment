@@ -42,6 +42,12 @@ void Application::initOpenGL(int width, int height) {
 
 	// Set the clear color
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
+	// 设置用户指针为当前 Application 实例
+	glfwSetWindowUserPointer(window, this);
+
+	// 设置帧缓冲区大小回调
+	glfwSetFramebufferSizeCallback(window,framebufferSizeCallback);
 }
 
 void Application::createScene()
@@ -88,8 +94,27 @@ void Application::cleanup() {
 	glfwTerminate();
 }
 
-void Application::onResize(GLFWwindow* win, int newWidth, int newHeight) {
+// 静态回调函数，用于桥接 GLFW 回调和成员函数
+void Application::framebufferSizeCallback(GLFWwindow* window, int width, int height) 
+
+{
+	// 获取存储在窗口中的 Application 实例指针
+	Application* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
+	if (app)
+	{
+		// 调用成员函数处理窗口大小变化
+		app->onResize(width, height);
+	}
+	else
+	{
+		std::cerr << "Failed to get Application instance" << std::endl;
+	}
+}
+
+// 成员函数处理窗口大小变化
+void Application::onResize(int newWidth, int newHeight) {
 	screenWidth = newWidth;
 	screenHeight = newHeight;
 	glViewport(0, 0, screenWidth, screenHeight);
+	std::cout << "窗口帧缓冲区大小变化为：" << screenWidth << " x " << screenHeight << std::endl;
 }

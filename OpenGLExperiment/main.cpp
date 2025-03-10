@@ -20,6 +20,8 @@ void CHECK_GL_ERROR(int a) {
 	}
 }
 
+void window_size_callback(GLFWwindow* win, int newWidth, int newHeight) {
+}
 
 int main(void) {
 	Application app;
@@ -33,7 +35,8 @@ int main(void) {
 		100.0f);                      // 远裁剪面
 
 
-	app.initOpenGL(800,600); //必须在所有初始化之前，包含opengl上下文的设置
+	app.initOpenGL(1000,800); //必须在所有初始化之前，包含opengl上下文的设置
+
 	app.createScene();
 	app.createRenderer();
 	//——————————————————生成模型

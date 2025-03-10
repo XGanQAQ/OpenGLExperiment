@@ -31,7 +31,8 @@ public:
 	void run();
 	void processInput();
 	void cleanup();
-	void onResize(GLFWwindow* win, int newWidth, int newHeight);
+	static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
+	void onResize(int newWidth, int newHeight);
 
 private:
 	double currentTime;

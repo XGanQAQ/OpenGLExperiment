@@ -157,34 +157,42 @@ GeometryGenerator::MeshData GeometryGenerator::createTetrahedron(float size) {
 
     // 定义四面体的4个顶点
     std::vector<glm::vec3> positions = {
-        { 0.0f,  halfSize,  0.0f},
-        { 0.0f, -halfSize,  halfSize},
-        {-halfSize, -halfSize, -halfSize},
-        { halfSize, -halfSize, -halfSize}
+        { 0.0f,  halfSize,  0.0f},        // 顶部顶点
+        { 0.0f, -halfSize,  halfSize},    // 前面底部顶点
+        {-halfSize, -halfSize, -halfSize}, // 左后底部顶点
+        { halfSize, -halfSize, -halfSize}  // 右后底部顶点
     };
 
     // 定义四面体的4个面
     std::vector<unsigned int> indices = {
-        0, 1, 2,
-        0, 2, 3,
-        0, 3, 1,
-        1, 3, 2
+        0, 1, 2,  // 前面
+        0, 2, 3,  // 左面
+        0, 3, 1,  // 右面
+        1, 3, 2   // 底面
     };
 
     // 定义法线
     std::vector<glm::vec3> normals = {
-        { 0.0f,  0.707f, -0.707f},
-        {-0.816f,  0.408f,  0.408f},
-        { 0.816f,  0.408f,  0.408f},
-        { 0.0f, -0.707f, -0.707f}
+        { 0.0f,  0.707f, -0.707f},  // 前面法线
+        {-0.816f,  0.408f,  0.408f}, // 左面法线
+        { 0.816f,  0.408f,  0.408f}, // 右面法线
+        { 0.0f, -0.707f, -0.707f}   // 底面法线
+    };
+
+    // 生成纹理坐标
+    std::vector<glm::vec2> texCoords = {
+        {0.5f, 1.0f},  // 顶部顶点纹理坐标
+        {0.5f, 0.0f},  // 前面底部顶点纹理坐标
+        {0.0f, 0.0f},  // 左后底部顶点纹理坐标
+        {1.0f, 0.0f}   // 右后底部顶点纹理坐标
     };
 
     // 构建顶点数据
     for (unsigned int i = 0; i < indices.size(); ++i) {
         Vertex vertex;
         vertex.position = positions[indices[i]];
-        vertex.normal = normals[i / 3];
-        vertex.texCoord = glm::vec2(0.0f, 0.0f); // 四面体通常不需要纹理坐标
+        vertex.normal = normals[i / 3];  // 每个面的法线相同
+        vertex.texCoord = texCoords[indices[i]];  // 使用顶点索引对应的纹理坐标
         meshData.vertices.push_back(vertex);
         meshData.indices.push_back(i);
     }
