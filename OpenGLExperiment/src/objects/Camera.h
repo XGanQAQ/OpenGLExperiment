@@ -12,7 +12,6 @@ public:
 
     // 获取视图矩阵
     glm::mat4 getViewMatrix() const;
-
     // 获取投影矩阵
     glm::mat4 getProjectionMatrix() const;
 

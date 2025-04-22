@@ -15,7 +15,11 @@ Camera::Camera(const glm::vec3& position, const glm::vec3& target, const glm::ve
 
 // 获取视图矩阵
 glm::mat4 Camera::getViewMatrix() const {
-    return glm::lookAt(getPosition(), getTarget(), getUp());
+    glm::mat4 vMat_T = glm::translate(glm::mat4(1.0f), -getPosition());
+    glm::mat4 vMat_R = glm::rotate(glm::mat4(1.0f), glm::radians(rotation.x), glm::vec3(1, 0, 0));
+	vMat_R *= glm::rotate(vMat_R, glm::radians(rotation.y), glm::vec3(0, 1, 0));
+	vMat_R *= glm::rotate(vMat_R, glm::radians(rotation.z), glm::vec3(0, 0, 1));
+    return vMat_R * vMat_T;
 }
 
 // 获取投影矩阵
