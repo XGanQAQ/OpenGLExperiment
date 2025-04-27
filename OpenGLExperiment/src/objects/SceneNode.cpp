@@ -21,7 +21,7 @@ void SceneNode::initNode()
 	}
 }
 
-void SceneNode::initUniforms()
+void SceneNode::inject_mvp_uniforms()
 {
 	if (material != nullptr)
 	{
@@ -32,7 +32,8 @@ void SceneNode::initUniforms()
 		vMat = camera->getViewMatrix();
 		mMat = getTransform() * parent->getTransform();
 		mvMat = vMat * mMat;
-		material->shaderProgram->setUniform("mv_matrix", mvMat);
-		material->shaderProgram->setUniform("proj_matrix", pMat);
+		material->setUniformMat4("mv_matrix", mvMat);
+		material->setUniformMat4("proj_matrix", pMat);
+		material->setUniformMat4("norm_matrix", glm::transpose(glm::inverse(mvMat)));
 	}
 }

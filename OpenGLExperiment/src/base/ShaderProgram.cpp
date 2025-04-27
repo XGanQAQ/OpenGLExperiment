@@ -1,12 +1,25 @@
 #include "ShaderProgram.h"
 #include <iostream>
 #include <fstream>
+#include <filesystem> // 修改为 std::experimental::filesystem
 
 void ShaderProgram::compile_path(const char* vShaderFilePath, const char* fShaderFilePath)
 {
-	std::string vertShaderStr = readFile(vShaderFilePath);
-	std::string fragShaderStr = readFile(fShaderFilePath);
-	compile_string(vertShaderStr, fragShaderStr);
+    // 检查顶点着色器文件是否存在
+    if (!std::filesystem::exists(vShaderFilePath)) { // 修改为 std::experimental::filesystem
+        std::cerr << "ERROR: Vertex shader file does not exist: " << vShaderFilePath << std::endl;
+        return;
+    }
+
+    // 检查片段着色器文件是否存在
+    if (!std::filesystem::exists(fShaderFilePath)) { // 修改为 std::experimental::filesystem
+        std::cerr << "ERROR: Fragment shader file does not exist: " << fShaderFilePath << std::endl;
+        return;
+    }
+
+    std::string vertShaderStr = readFile(vShaderFilePath);
+    std::string fragShaderStr = readFile(fShaderFilePath);
+    compile_string(vertShaderStr, fragShaderStr);
 }
 
 void ShaderProgram::compile_string(const std::string& vertexShaderSource, const std::string& fragmentShaderSource)
@@ -87,43 +100,87 @@ void ShaderProgram::unuse()
 
 void ShaderProgram::setUniform(const std::string& name, int value)
 {
-	GLint location = uniformLocations[name];
-	if (location == 0) {
+	GLint location;
+	auto it = uniformLocations.find(name);
+	if (it == uniformLocations.end()) {
 		location = glGetUniformLocation(programID, name.c_str());
 		uniformLocations[name] = location;
 	}
-	glProgramUniform1i(programID,location, value);
+	else {
+		location = it->second;
+	}
+	if (location != -1) {
+		glProgramUniform1i(programID, location, value);
+	}
 }
+
 
 void ShaderProgram::setUniform(const std::string& name, float value)
 {
-	GLint location = uniformLocations[name];
-	if (location == 0) {
+	GLint location;
+	auto it = uniformLocations.find(name);
+	if (it == uniformLocations.end()) {
 		location = glGetUniformLocation(programID, name.c_str());
 		uniformLocations[name] = location;
 	}
-	glProgramUniform1f(programID,location, value);
+	else {
+		location = it->second;
+	}
+	if (location != -1) {
+		glProgramUniform1f(programID, location, value);
+	}
 }
+
 
 void ShaderProgram::setUniform(const std::string& name, const glm::mat4& matrix)
 {
-	GLint location = uniformLocations[name];
-	if (location == 0) {
+	GLint location;
+	auto it = uniformLocations.find(name);
+	if (it == uniformLocations.end()) {
 		location = glGetUniformLocation(programID, name.c_str());
 		uniformLocations[name] = location;
 	}
-	glProgramUniformMatrix4fv(programID, location, 1, GL_FALSE, glm::value_ptr(matrix));
+	else {
+		location = it->second;
+	}
+	if (location != -1) {
+		glProgramUniformMatrix4fv(programID, location, 1, GL_FALSE, glm::value_ptr(matrix));
+	}
 }
 
 void ShaderProgram::setUniform(const std::string& name, const glm::vec3& vector)
 {
-	GLint location = uniformLocations[name];
-	if (location == 0) {
+	GLint location;
+	auto it = uniformLocations.find(name);
+	if (it == uniformLocations.end()) {
 		location = glGetUniformLocation(programID, name.c_str());
 		uniformLocations[name] = location;
 	}
-	glProgramUniform3fv(programID, location, 1, glm::value_ptr(vector));
+	else {
+		location = it->second;
+	}
+	if (location != -1) {
+		glProgramUniform3fv(programID, location, 1, glm::value_ptr(vector));
+	}
 }
+
+
+void ShaderProgram::setUniform(const std::string& name, const glm::vec4& vector)
+{
+	GLint location;
+	auto it = uniformLocations.find(name);
+	if (it == uniformLocations.end()) {
+		location = glGetUniformLocation(programID, name.c_str());
+		uniformLocations[name] = location;
+	}
+	else {
+		location = it->second;
+	}
+	if (location != -1) {
+		glProgramUniform4fv(programID, location, 1, glm::value_ptr(vector));
+	}
+}
+
 
 std::string ShaderProgram::readFile(const char* filePath)
 {

@@ -10,6 +10,7 @@ struct PositionalLight
 	vec4 specular;
 	vec3 position;
 };
+
 struct Material
 {	vec4 ambient;
 	vec4 diffuse;
@@ -24,6 +25,7 @@ uniform mat4 mv_matrix;
 uniform mat4 proj_matrix;
 uniform mat4 norm_matrix;
 
+
 void main(void)
 {	vec4 color;
 	
@@ -31,7 +33,7 @@ void main(void)
 	vec4 P = mv_matrix * vec4(vertPos,1.0);
 	
 	// convert normal to view space
-	vec3 N = normalize((norm_matrix * vec4(vertNormal,1.0)).xyz);
+	vec3 N = normalize((norm_matrix * vec4(vertNormal,0.0)).xyz);
 	
 	// calculate view-space light vector (from point to light)
 	vec3 L = normalize(light.position - P.xyz);

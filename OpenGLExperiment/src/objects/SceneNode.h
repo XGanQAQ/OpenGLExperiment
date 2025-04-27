@@ -19,8 +19,8 @@ public:
 	Model* model = nullptr;
 	Material* material = nullptr;
 	
-	void initNode() override; // 初始化节点，用于渲染前的准备工作
-	void initUniforms(); // 初始化uniform变量，用于渲染前的准备工作
+	void initNode() override; // 初始化节点，用于渲染前的准备工作, 在第一次渲染前调用
+	void inject_mvp_uniforms(); // 注入 MVP 矩阵到材质的着色器中, 在每一次渲染前调用
 private:
 
 };

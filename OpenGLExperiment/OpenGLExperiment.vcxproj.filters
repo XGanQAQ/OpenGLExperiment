@@ -129,6 +129,15 @@
     <ClCompile Include="src\ui\NodeTreeManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\objects\GlobalAmbient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objects\DirLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\base\LightModelStruct.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tools\Utils.h">
@@ -242,9 +251,25 @@
     <ClInclude Include="src\ui\NodeTreeManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\objects\GlobalAmbient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\DirLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="glew32.dll" />
+    <None Include="assets\shaders\1fragShader.glsl" />
+    <None Include="assets\shaders\1vertShader.glsl" />
+    <None Include="assets\shaders\TexFShader.glsl" />
+    <None Include="assets\shaders\TexVShader.glsl" />
+    <None Include="assets\shaders\BlinnPhongShaders\fragShader.glsl" />
+    <None Include="assets\shaders\BlinnPhongShaders\vertShader.glsl" />
+    <None Include="assets\shaders\GouraudShaders\fragShader.glsl" />
+    <None Include="assets\shaders\GouraudShaders\vertShader.glsl" />
+    <None Include="assets\shaders\PhongShaders\fragShader.glsl" />
+    <None Include="assets\shaders\PhongShaders\vertShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glew32.lib" />

@@ -27,6 +27,7 @@
     <ClCompile Include="include\imgui\imgui_tables.cpp" />
     <ClCompile Include="include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\base\ElementBuffer.cpp" />
+    <ClCompile Include="src\base\LightModelStruct.h" />
     <ClCompile Include="src\base\Texture.cpp" />
     <ClCompile Include="src\base\VertexBufferElement.cpp" />
     <ClCompile Include="src\component\Sprite2D.cpp" />
@@ -38,6 +39,8 @@
     <ClCompile Include="src\component\Model.cpp" />
     <ClCompile Include="src\core\Renderer.cpp" />
     <ClCompile Include="src\core\Scene.cpp" />
+    <ClCompile Include="src\objects\DirLight.cpp" />
+    <ClCompile Include="src\objects\GlobalAmbient.cpp" />
     <ClCompile Include="src\objects\SceneNode.cpp" />
     <ClCompile Include="src\base\ShaderProgram.cpp" />
     <ClCompile Include="src\base\VertexArrayObject.cpp" />
@@ -77,6 +80,8 @@
     <ClInclude Include="src\component\Model.h" />
     <ClInclude Include="src\core\Renderer.h" />
     <ClInclude Include="src\core\Scene.h" />
+    <ClInclude Include="src\objects\DirLight.h" />
+    <ClInclude Include="src\objects\GlobalAmbient.h" />
     <ClInclude Include="src\objects\SceneNode.h" />
     <ClInclude Include="src\base\ShaderProgram.h" />
     <ClInclude Include="src\base\VertexBuffer.h" />
@@ -89,6 +94,16 @@
     <ClInclude Include="src\ui\NodeTreeManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\shaders\1fragShader.glsl" />
+    <None Include="assets\shaders\1vertShader.glsl" />
+    <None Include="assets\shaders\BlinnPhongShaders\fragShader.glsl" />
+    <None Include="assets\shaders\BlinnPhongShaders\vertShader.glsl" />
+    <None Include="assets\shaders\GouraudShaders\fragShader.glsl" />
+    <None Include="assets\shaders\GouraudShaders\vertShader.glsl" />
+    <None Include="assets\shaders\PhongShaders\fragShader.glsl" />
+    <None Include="assets\shaders\PhongShaders\vertShader.glsl" />
+    <None Include="assets\shaders\TexFShader.glsl" />
+    <None Include="assets\shaders\TexVShader.glsl" />
     <None Include="glew32.dll" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +208,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>./include;include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -211,6 +227,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>./include;%(AdditionalIncludeDirectories);include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
