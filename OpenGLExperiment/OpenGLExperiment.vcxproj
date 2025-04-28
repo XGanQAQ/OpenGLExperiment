@@ -41,6 +41,7 @@
     <ClCompile Include="src\core\Scene.cpp" />
     <ClCompile Include="src\objects\DirLight.cpp" />
     <ClCompile Include="src\objects\GlobalAmbient.cpp" />
+    <ClCompile Include="src\objects\LightModelNode.cpp" />
     <ClCompile Include="src\objects\SceneNode.cpp" />
     <ClCompile Include="src\base\ShaderProgram.cpp" />
     <ClCompile Include="src\base\VertexArrayObject.cpp" />
@@ -82,6 +83,7 @@
     <ClInclude Include="src\core\Scene.h" />
     <ClInclude Include="src\objects\DirLight.h" />
     <ClInclude Include="src\objects\GlobalAmbient.h" />
+    <ClInclude Include="src\objects\LightModelNode.h" />
     <ClInclude Include="src\objects\SceneNode.h" />
     <ClInclude Include="src\base\ShaderProgram.h" />
     <ClInclude Include="src\base\VertexBuffer.h" />

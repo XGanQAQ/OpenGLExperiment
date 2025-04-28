@@ -138,6 +138,9 @@
     <ClCompile Include="src\base\LightModelStruct.h">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\objects\LightModelNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tools\Utils.h">
@@ -255,6 +258,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\objects\DirLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\LightModelNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

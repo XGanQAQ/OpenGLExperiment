@@ -88,7 +88,7 @@ void Renderer::render(BaseNode* sceneNode)
 	// 渲染当前节点
 	SceneNode* node = dynamic_cast<SceneNode*>(sceneNode);
 	if (node != nullptr) {
-		node->inject_mvp_uniforms();
+		node->inject_uniforms();
 		if(!node->model->indices.empty())
 			render_Element(node->model, node->material);
 		else

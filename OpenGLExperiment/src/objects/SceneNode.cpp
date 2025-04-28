@@ -21,7 +21,7 @@ void SceneNode::initNode()
 	}
 }
 
-void SceneNode::inject_mvp_uniforms()
+void SceneNode::inject_uniforms()
 {
 	if (material != nullptr)
 	{
@@ -35,5 +35,7 @@ void SceneNode::inject_mvp_uniforms()
 		material->setUniformMat4("mv_matrix", mvMat);
 		material->setUniformMat4("proj_matrix", pMat);
 		material->setUniformMat4("norm_matrix", glm::transpose(glm::inverse(mvMat)));
+		
+		//注入光照模型uniforms
 	}
 }
