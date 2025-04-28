@@ -1,142 +1,51 @@
-## 概述：
-项目目标：可编辑场景3D渲染引擎
-Demo目标：林中小屋的室内环境
-使用C++、OpenGL、Im GUI编写的小型3D渲染学习项目、
-专注于OpenGL与计算机图形学的学习
+# OpenGLExperiment
 
-## 设计理念
-- 简单
-- 专注于方便学习渲染
+## 项目简介
 
-## 计划
- - [ ] 渲染功能
-	 - [x]  基本抽象封装
-		 - [x] VAO,VBO抽象
-		 - [x] Shaderprogram抽象
-		 - [x] Model、Mesh抽象
-		 - [x] Material抽象
-		 - [x] Scene、SceneNode抽象
-		 - [x] Camera抽象
-		 - [x] Renderer抽象
-		 - [x] Application抽象
-	 - [x] 便捷几何体
-		 - [x] 矩阵栈
-		 - [x] 基本几何体类的封装
-	- [ ] 纹理
-		- [x] 简单纹理
-		- [ ] 高级纹理功能
-	- [ ] 模型
-		- [x] 导入obj模型
-	- [ ] 光照
-	- [ ] 天空盒
-	- [ ] 阴影
-- [ ] 交互界面
-- [ ] 物理模拟
-- [ ] 游戏循环
+**OpenGLExperiment** 是一个基于 **C++** 和 **OpenGL** 的 3D 渲染学习项目。  
+项目专注于模块化封装与核心原理实现，旨在帮助开发者系统学习计算机图形学，理解 3D 渲染引擎的基本构建流程，并为进一步扩展高级渲染效果（如光照、阴影、PBR 材质等）打下基础。
 
-## 程序架构
-### 依赖库
-GLFW：窗口管理
-GLM：数学运算
-Im GUI：UI界面
-SOIL：纹理图形加载库
+本项目采用了清晰的分层架构设计，涵盖模型管理、材质系统、摄像机与场景管理、渲染器封装、资源加载与 UI 支持等模块，适合作为学习 OpenGL 渲染流程或搭建个人渲染引擎的起点。
 
-### 项目结构
+---
+
+## 特性概览
+
+- 简洁的 OpenGL 抽象封装（VAO、VBO、Shader、Mesh、Material）
+- 场景管理与节点系统（Scene、SceneNode）
+- 简单易用的界面编辑器（基于 ImGUI）
+- OBJ 模型导入与纹理加载
+- 光照系统与材质扩展预留
+- 良好的模块化与可扩展性设计
+
+---
+
+## 快速开始
+
+### 环境要求
+
+- C++17 及以上编译器
+- Visual Studio 2022
+- OpenGL 4.5 或更高版本
+
+### 克隆与构建
+
+```bash
+git clone https://github.com/your-repo/OpenGLExperiment.git
 ```
-/OpenGLExperiment
-	/src
-		/base 对opengl的封装
-			baseAll.h
-			Mesh.cpp
-			Mesh.h
-			ShaderProgram.cpp
-			ShaderProgram.h
-			VertexArrayObject.cpp
-			VertexArrayObject.h
-			VertexBuffer.cpp
-			VertexBuffer.h
-			VertexBufferElement.h
-		/component 组件
-			Material.cpp
-			Material.h
-			Model.cpp
-			Model.h
-		/core 核心
-		    Application.cpp
-		    Application.h
-		    Renderer.cpp
-		    Renderer.h
-		    Scene.cpp
-		    Scene.h
-		/objects 对象
-		    Camera.h
-		    Camera.cpp
-		    SceneNode.cpp
-		    SceneNode.cpp
-		    Light.h
-		    Light.cpp
-		    Skybox.h
-		    Skybox.cpp
-		/resources 资源管理
-		    ModelLoader.h
-		    ModelLoader.cpp
-		    TextureManager.h
-		    TextureManager.cpp
-		    ShaderManager.h
-		    ShaderManager.cpp
-		/tools
-		    Geometry.h 创建基本几何体
-		    Geometry.cpp
-			ImportedModel.cpp 读取模型
-			ImportedModel.h
-			Utils.cpp 老旧工具
-			Utils.h
-		/advanced
-		    ShadowMapping.h
-		    ShadowMapping.cpp
-		    AdvancedTexturing.h
-		    AdvancedTexturing.cpp
-		/ui
-		    ImGUI.h
-		    ImGUI.cpp
-	/assets
-	    /models
-	    /textures
-	    /shaders
-	/include
-	(公共的头文件)
-	/lib
-    (外部库引用)
-    /x64
-    (x64的可执行文件)
-	    /debug
-	/docs
-	(可阅读文档)
-	/test
-	(测试模块)
-	
 
-```
-### 核心运行逻辑
-- main
-	- application
-		- Scene
-			- SceneNode 管理场景中的对象（例如位置、旋转、缩放）
-				- Model 管理多个 Mesh
-					- VertexArrayObject VAO封装
-					- Mesh 网格 管理顶点数据和顶点属性配置
-						- 第一个Mesh固定为顶点坐标网格
-						- VertexBuffer VBO封装
-						- VretexBufferElement 结构体记录vbo配置信息
-				- Material 材质信息
-					- ShaderProgram
-					- Texture
-			- Camera
-			- Light
-		- Renderer 
-			- 从SceneNode的Model和Material得到vao进行绘制
-			- MainScene 注入的场景，用于绘制
-			- MainCamera 从场景中获得主相机
+使用 Visual Studio 2022 打开 `OpenGLExperiment.sln`，配置相关依赖后即可编译运行。
 
+---
 
+## 文档与资料
 
+关于项目的详细设计说明、模块功能、开发计划等内容，请参阅 [docs/](docs/) 目录中的文档。
+
+---
+
+## 许可证
+
+本项目采用 [MIT License](LICENSE) 开源，欢迎学习与使用。
+
+---
